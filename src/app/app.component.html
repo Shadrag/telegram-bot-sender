@@ -5,10 +5,23 @@
   </header>
 
 
-  <div class="avenir pa3">
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-green" href="#0">START</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-red" href="#0">STOP</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-blue" href="#0">NEW TASK</a>
+  <div class="avenir pa3 flex flex-row">
+    <div>
+      <button>START</button>
+    </div>
+    <div>
+      <button>STOP</button>
+    </div>
+    <!--<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-green" href="#0">START</a>-->
+    <!--<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-red" href="#0">STOP</a>-->
+
+    <div>
+      <label for="">NEW TASK</label>
+      <input type='file' (change)="loadFile($event)">
+    </div>
+<div>
+  <button>TOKENS</button>
+</div>
   </div>
 
 
