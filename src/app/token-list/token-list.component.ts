@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DbService} from '../services/db.service';
 
 @Component({
   selector: 'app-token-list',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TokenListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dbService: DbService) {
+  }
 
   ngOnInit() {
+    this.dbService.test();
   }
 
 }

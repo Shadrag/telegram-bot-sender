@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {FileUploadModule} from 'primeng/fileupload';
+import {DbService} from './services/db.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {FileUploadModule} from 'primeng/fileupload';
     FileUploadModule,
     // GrowlModule
   ],
-  providers: [],
+  providers: [DbService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
