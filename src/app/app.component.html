@@ -1,50 +1,54 @@
-
-<router-outlet></router-outlet>
-
-<main class="mw8 center">
-
-  <header class="w-100 pa3 bg-white">
-    <div class="f2">telegram..bot..sender</div>
-  </header>
+<div class="container">
+    <h1>telegram..bot..sender</h1>
 
 
-  <div class="avenir pa3 flex flex-row">
-    <div>
-      <button>START</button>
-    </div>
-    <div>
-      <button>STOP</button>
-    </div>
-    <!--<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-green" href="#0">START</a>-->
-    <!--<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-red" href="#0">STOP</a>-->
+  <!--<main class="mw8 center">-->
 
-    <div>
-      <label for="">NEW TASK</label>
-      <input type='file' (change)="loadFile($event)">
-    </div>
-<div>
-  <button>TOKENS</button>
+
+
+    <!--<div class="avenir pa3 flex flex-row">-->
+      <!--<div>-->
+        <!--<button>START</button>-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<button>STOP</button>-->
+      <!--</div>-->
+      <!--&lt;!&ndash;<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-green" href="#0">START</a>&ndash;&gt;-->
+      <!--&lt;!&ndash;<a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-dark-red" href="#0">STOP</a>&ndash;&gt;-->
+
+      <!--<div>-->
+        <!--<label for="">NEW TASK</label>-->
+        <!--<input type='file' (change)="loadFile($event)">-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<button>TOKENS</button>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="avenir">-->
+      <!--<div class="ba ma2 pa2 b&#45;&#45;black-30 flex flex-row items-center">-->
+        <!--<div class="f3">-->
+          <!--<i class="fa fa-cog f3" aria-hidden="true"></i>-->
+          <!--<i class="fa fa-pause-circle-o" aria-hidden="true"></i>-->
+          <!--<i class="fa fa-trash" aria-hidden="true"></i>-->
+          <!--<i class="fa fa-bolt" aria-hidden="true"></i>-->
+        <!--</div>-->
+
+        <!--<div class="ph3-ns">task1</div>-->
+
+      <!--</div>-->
+      <!--<div class="ba ma2 pa2 b&#45;&#45;black-30">task2</div>-->
+      <!--<div class="ba ma2 pa2 b&#45;&#45;black-30">task3</div>-->
+    <!--</div>-->
+
+
+  <!--</main>-->
+
+
+
+
+  <router-outlet></router-outlet>
 </div>
-  </div>
-
-
-  <div class="avenir">
-    <div class="ba ma2 pa2 b--black-30 flex flex-row items-center">
-      <div class="f3">
-        <i class="fa fa-cog f3" aria-hidden="true"></i>
-        <i class="fa fa-pause-circle-o" aria-hidden="true"></i>
-        <i class="fa fa-trash" aria-hidden="true"></i>
-        <i class="fa fa-bolt" aria-hidden="true"></i>
-      </div>
-
-      <div class="ph3-ns">task1</div>
-
-    </div>
-    <div class="ba ma2 pa2 b--black-30">task2</div>
-    <div class="ba ma2 pa2 b--black-30">task3</div>
-  </div>
-
-
-</main>
 
 

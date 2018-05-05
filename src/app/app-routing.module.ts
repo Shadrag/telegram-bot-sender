@@ -8,10 +8,10 @@ import {TokenListComponent} from './token-list/token-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/task-list', pathMatch: 'full'},
-  {path: '**', redirectTo: '/task-list' },
   {path: 'task/:id', component: TaskComponent},
   {path: 'task-list', component: TaskListComponent},
-  {path: 'token-list', component: TokenListComponent}
+  {path: 'token-list', component: TokenListComponent},
+  {path: '**', redirectTo: '/task-list' },
 ];
 
 @NgModule({

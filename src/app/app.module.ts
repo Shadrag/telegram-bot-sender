@@ -6,8 +6,11 @@ import {AppComponent} from './app.component';
 import {TaskListComponent} from './task-list/task-list.component';
 import {TokenListComponent} from './token-list/token-list.component';
 import {TaskComponent} from './task/task.component';
-import { AppRoutingModule } from './/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
+import {ToolbarModule} from 'primeng/toolbar';
+import {ButtonModule} from 'primeng/button';
+import {FileUploadModule} from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,11 @@ import { AppRoutingModule } from './/app-routing.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToolbarModule,
+    ButtonModule,
+    FileUploadModule,
+    // GrowlModule
   ],
   providers: [],
   bootstrap: [AppComponent]
