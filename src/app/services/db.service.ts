@@ -8,31 +8,36 @@ export class DbService {
   db = null;
 
   constructor() {
-    console.log('init db service');
-    let db = this.db;
-    const request = indexedDB.open('TelegramBotSender', 1);
+    console.log('init _db service');
+    const model = this;
+    const requestDB = indexedDB.open('TelegramBotSender', 1);
 
-    request.onerror = function (event) {
+    requestDB.onerror = function (event) {
       alert('Could not access IndexedDB.');
     };
 
-    request.onsuccess = function (event) {
-      db = (<IDBOpenDBRequest>event.target).result;
+    requestDB.onsuccess = function (event) {
+      model.db = (<IDBOpenDBRequest>event.target).result;
 
-      db.onerror = function (e) {
+      model.db.onerror = function (e) {
         alert('Database error: ' + e.target.errorCode);
       };
     };
 
-    request.onupgradeneeded = function(event) {
-      const _db = (<IDBOpenDBRequest>event.target).result;
-      const objectStore = _db.createObjectStore('name', { keyPath: 'myKey' });
+    requestDB.onupgradeneeded = function (event) {
+      const local_db = (<IDBOpenDBRequest>event.target).result;
+
+      const objectStore = local_db.createObjectStore('token-list', {keyPath: 'id', autoIncrement: true});
+      objectStore.createIndex('id', 'id', {unique: true});
     };
 
+
   }
+
 
   test() {
     // console.log('test');
   }
+
 
 }

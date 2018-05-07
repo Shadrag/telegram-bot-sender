@@ -12,6 +12,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {FileUploadModule} from 'primeng/fileupload';
 import {DbService} from './services/db.service';
+import {TokenService} from './services/token.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {DbService} from './services/db.service';
     FileUploadModule,
     // GrowlModule
   ],
-  providers: [DbService],
+  providers: [DbService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
