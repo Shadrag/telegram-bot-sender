@@ -12,8 +12,11 @@ export class TokenService {
   }
 
   getList() {
-    console.log('get token list');
-    return [];
+    const s$ = new Subject();
+    const tx = this.dbService.db.transaction(['token-list']);
+    const rq = tx.objectStore('token-list').getAll();
+    rq.onsuccess = event => s$.next(event.target.result);
+    return s$;
   }
 
   add(token: string = '') {
@@ -21,7 +24,7 @@ export class TokenService {
     const tx = this.dbService.db.transaction(['token-list'], 'readwrite');
     const hash = token ? md5(token) : '';
     const rq = tx.objectStore('token-list').add({token, hash});
-    rq.onsuccess = event => s$.next(event);
+    rq.onsuccess = event => s$.next(event.target.result);
     // rq.onerror = event => s$.next();
     return s$;
   }

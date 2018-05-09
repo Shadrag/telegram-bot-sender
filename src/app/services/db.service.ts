@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable({
   providedIn: 'root'
@@ -8,20 +9,23 @@ export class DbService {
   db = null;
 
   constructor() {
-    console.log('init _db service');
-    const model = this;
-    const requestDB = indexedDB.open('TelegramBotSender', 1);
+  }
 
-    requestDB.onerror = function (event) {
-      alert('Could not access IndexedDB.');
-    };
+  init() {
+    console.log('init db service');
+    const res$ = new Subject();
+    const requestDB = indexedDB.open('TelegramBotSender', 1);
+    const model = this;
+
+    requestDB.onerror = event => alert('Could not access IndexedDB.');
 
     requestDB.onsuccess = function (event) {
       model.db = (<IDBOpenDBRequest>event.target).result;
-
-      model.db.onerror = function (e) {
-        alert('Database error: ' + e.target.errorCode);
+      res$.complete();
+      model.db.onerror = e => {
+        // alert('Database error: ' + e.target.errorCode);
       };
+
     };
 
     requestDB.onupgradeneeded = function (event) {
@@ -31,12 +35,7 @@ export class DbService {
       objectStore.createIndex('id', 'id', {unique: true});
     };
 
-
-  }
-
-
-  test() {
-    // console.log('test');
+    return res$;
   }
 
 

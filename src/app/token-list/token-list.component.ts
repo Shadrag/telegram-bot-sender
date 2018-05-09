@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {DbService} from '../services/db.service';
 import {TokenService} from '../services/token.service';
 
 @Component({
@@ -9,17 +8,18 @@ import {TokenService} from '../services/token.service';
 })
 export class TokenListComponent implements OnInit {
 
-  constructor(private dbService: DbService, private tokenService: TokenService) {
+  constructor(private tokenService: TokenService) {
   }
 
   ngOnInit() {
-    this.dbService.test();
+    this.tokenService.getList()
+      .subscribe(v => console.log(v));
   }
 
   addNewToken() {
     this.tokenService.add()
       .subscribe(v => {
-        console.log('added blank token');
+        console.log('added blank token', v);
       });
 
   }
