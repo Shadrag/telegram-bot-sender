@@ -37,11 +37,9 @@ export class TokenListComponent implements OnInit {
   }
 
   addNewToken() {
-    this.tokenService.add()
-      .subscribe(v => {
-        console.log('added blank token', v);
-      });
-
+    this.currentEditingId = null;
+    this.tokenEditor.nativeElement.value = '';
+    this.displayTokenEditor = true;
   }
 
   edit(token) {
@@ -72,10 +70,13 @@ export class TokenListComponent implements OnInit {
   }
 
   editorSave() {
-    this.tokenService.update(this.currentEditingId, this.tokenEditor.nativeElement.value)
-      .subscribe(value => {
+    (_.isEmpty(this.currentEditingId)
+      ? this.tokenService.add(this.tokenEditor.nativeElement.value)
+      : this.tokenService.update(this.currentEditingId, this.tokenEditor.nativeElement.value))
+      .subscribe(v => {
         this.reloadList$.next(true);
       });
+
     this.displayTokenEditor = false;
   }
 
