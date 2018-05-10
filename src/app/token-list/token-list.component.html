@@ -22,7 +22,7 @@
       <td>{{token.token}}</td>
       <td>{{token.hash}}</td>
       <td>
-        <button pButton type="button" icon="fa-pencil" (click)="edit(token.id)"></button>
+        <button pButton type="button" icon="fa-pencil" (click)="edit(token)"></button>
         <button pButton type="button" icon="fa-trash-o" (click)="delete(token.id)"></button>
       </td>
     </tr>
@@ -30,3 +30,13 @@
 </p-table>
 
 <p-confirmDialog></p-confirmDialog>
+
+<p-dialog header="Token" [(visible)]="displayTokenEditor" [modal]="true" [responsive]="true" [minWidth]="200">
+
+  <input id="float-input" type="text" size="50" pInputText #tokenEditor>
+
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="editorSave()" label="Save"></button>
+    <button type="button" pButton icon="fa-close" (click)="editorCancel()" label="Cancel"></button>
+  </p-footer>
+</p-dialog>

@@ -8,6 +8,7 @@ import {TableModule} from 'primeng/table';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
 
 import {AppComponent} from './app.component';
 import {TaskListComponent} from './task-list/task-list.component';
@@ -33,7 +34,8 @@ import {TokenService} from './services/token.service';
     FileUploadModule,
     TableModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    InputTextModule
   ],
   providers: [DbService, TokenService, ConfirmationService],
   bootstrap: [AppComponent]

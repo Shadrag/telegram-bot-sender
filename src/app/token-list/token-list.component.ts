@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TokenService} from '../services/token.service';
 import * as _ from 'lodash';
 import {ConfirmationService} from 'primeng/api';
@@ -14,6 +14,11 @@ export class TokenListComponent implements OnInit {
 
   tokenList;
   reloadList$ = new BehaviorSubject(true);
+  displayTokenEditor = false;
+  currentEditingId = null;
+
+  @ViewChild('tokenEditor') tokenEditor;
+
 
   constructor(private tokenService: TokenService, private confirmationService: ConfirmationService) {
   }
@@ -39,8 +44,10 @@ export class TokenListComponent implements OnInit {
 
   }
 
-  edit(id) {
-
+  edit(token) {
+    this.tokenEditor.nativeElement.value = (token.token === '<no value>') ? '' : token.token;
+    this.currentEditingId = token.id;
+    this.displayTokenEditor = true;
   }
 
   delete(id) {
@@ -53,10 +60,23 @@ export class TokenListComponent implements OnInit {
           .subscribe(value => {
             this.reloadList$.next(true);
           });
-        // this.msgs = [{severity: 'info', summary: 'Confirmed', detail: 'Record deleted'}];
       },
       reject: () => {
       }
     });
   }
+
+  editorCancel() {
+    this.tokenEditor.nativeElement.value = '';
+    this.displayTokenEditor = false;
+  }
+
+  editorSave() {
+    this.tokenService.update(this.currentEditingId, this.tokenEditor.nativeElement.value)
+      .subscribe(value => {
+        this.reloadList$.next(true);
+      });
+    this.displayTokenEditor = false;
+  }
+
 }

@@ -38,6 +38,12 @@ export class TokenService {
   }
 
   update(id, token: string) {
-    console.log('update token');
+    const s$ = new Subject();
+    const tx = this.dbService.db.transaction(['token-list'], 'readwrite');
+    const hash = token ? md5(token) : '';
+    const rq = tx.objectStore('token-list').put({id, token, hash});
+    rq.onsuccess = event => s$.next(event.target.result);
+    // rq.onerror = event => s$.next();
+    return s$;
   }
 }
