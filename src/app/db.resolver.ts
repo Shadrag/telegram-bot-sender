@@ -9,7 +9,6 @@ export class DbResolver implements Resolve<any> {
   }
 
   resolve() {
-    console.log('resolver');
     return this.dbService.init();
   }
 }

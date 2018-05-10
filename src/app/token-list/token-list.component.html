@@ -6,3 +6,27 @@
     <button pButton type="button" label="Add new token" icon="fa-plus" (click)="addNewToken()"></button>
   </div>
 </p-toolbar>
+
+<p></p>
+
+<p-table [value]="tokenList">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Token</th>
+      <th>Hash</th>
+      <th class="col-action"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-token>
+    <tr>
+      <td>{{token.token}}</td>
+      <td>{{token.hash}}</td>
+      <td>
+        <button pButton type="button" icon="fa-pencil" (click)="edit(token.id)"></button>
+        <button pButton type="button" icon="fa-trash-o" (click)="delete(token.id)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-confirmDialog></p-confirmDialog>

@@ -30,7 +30,11 @@ export class TokenService {
   }
 
   delete(id) {
-    console.log('delete token');
+    const s$ = new Subject();
+    const tx = this.dbService.db.transaction(['token-list'], 'readwrite');
+    const rq = tx.objectStore('token-list').delete(id);
+    rq.onsuccess = event => s$.next(event.target.result);
+    return s$;
   }
 
   update(id, token: string) {
