@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -7,13 +8,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
   }
 
-  afterUpload(event) {
-    console.log('onBasicUploadAuto', event);
+
+  readFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      this.router.navigate(['/task']);
+      console.log(fileReader.result);
+    };
+    fileReader.readAsText(event.files[0]);
   }
 }

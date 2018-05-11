@@ -14,6 +14,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: '/task-list', pathMatch: 'full'},
       {path: 'task/:id', component: TaskComponent},
+      {path: 'task', component: TaskComponent},
       {path: 'task-list', component: TaskListComponent},
       {path: 'token-list', component: TokenListComponent},
     ]

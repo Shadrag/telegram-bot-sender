@@ -5,8 +5,9 @@
   </div>
 
   <div class="ui-toolbar-group-right">
-    <p-fileUpload #fubauto mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000"
-                  (onUpload)="afterUpload($event)" auto="true" chooseLabel="New task"></p-fileUpload>
+    <p-fileUpload #fubauto mode="basic" accept=".json" maxFileSize="1000000"
+                  customUpload="true" (uploadHandler)="readFile($event)" [auto]="true"
+                  chooseLabel="New task"></p-fileUpload>
     <button pButton type="button" label="Tokens" routerLink="/token-list"></button>
   </div>
 </p-toolbar>
