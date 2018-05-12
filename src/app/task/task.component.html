@@ -1,3 +1,51 @@
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <button pButton type="button" label="Task list" icon="fa-backward" routerLink="/task-list"></button>
+  </div>
+  <div class="ui-toolbar-group-right">
+    <!--<button pButton type="button" label="Add new token" icon="fa-plus" (click)="addNewToken()"></button>-->
+  </div>
+</p-toolbar>
+
+<h1 style="text-align: center">task..detail</h1>
+
+<div class="ui-g">
+  <div class="ui-g-2 tr">Project:</div>
+  <div class="ui-g-10">{{taskObject?.project}}</div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-g-2 tr">Date:</div>
+  <div class="ui-g-10">{{taskObject?.date}}</div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-g-2 tr">Token:</div>
+  <div class="ui-g-10">{{taskObject?.token}}</div>
+</div>
+
+
+<div class="ui-g">
+  <div class="ui-g-2 tr">Label:</div>
+  <div class="ui-g-10">
+    <input id="input" type="text" size="max" pInputText [(ngModel)]="text" style="width: 100%">
+  </div>
+</div>
+
+
+<h3>Message</h3>
+
+<p-editor [(ngModel)]="message" [style]="{'height':'320px'}">
+  <p-header>
+    <span class="ql-formats">
+      <button class="ql-bold" aria-label="Bold"></button>
+      <button class="ql-italic" aria-label="Italic"></button>
+      <button class="ql-underline" aria-label="Underline"></button>
+    </span>
+  </p-header>
+</p-editor>
+
 <p>
-  task works!
+  <p-button (onClick)="save()" label="Save"></p-button>
+  <p-button (onClick)="cancel()" label="Cancel"></p-button>
 </p>

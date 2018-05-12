@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {TaskService} from '../services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -8,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private taskService: TaskService) {
   }
 
   ngOnInit() {
@@ -18,8 +19,8 @@ export class TaskListComponent implements OnInit {
   readFile(event) {
     const fileReader = new FileReader();
     fileReader.onload = (e) => {
+      this.taskService.dataNewTask = JSON.parse(fileReader.result);
       this.router.navigate(['/task']);
-      console.log(fileReader.result);
     };
     fileReader.readAsText(event.files[0]);
   }
