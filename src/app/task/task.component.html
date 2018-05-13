@@ -11,40 +11,41 @@
 
 <div class="ui-g">
   <div class="ui-g-2 tr">Project:</div>
-  <div class="ui-g-10">{{taskObject?.project}}</div>
+  <div class="ui-g-10">{{taskForm.value.project}}</div>
 </div>
 
 <div class="ui-g">
   <div class="ui-g-2 tr">Date:</div>
-  <div class="ui-g-10">{{taskObject?.date}}</div>
+  <div class="ui-g-10">{{taskForm.value.date}}</div>
 </div>
 
 <div class="ui-g">
-  <div class="ui-g-2 tr">Token:</div>
-  <div class="ui-g-10">{{taskObject?.token}}</div>
+  <div class="ui-g-2 tr">Token hash:</div>
+  <div class="ui-g-10">{{taskForm.value.token}}</div>
 </div>
 
-
-<div class="ui-g">
-  <div class="ui-g-2 tr">Label:</div>
-  <div class="ui-g-10">
-    <input id="input" type="text" size="max" pInputText [(ngModel)]="text" style="width: 100%">
+<form [formGroup]="taskForm">
+  <div class="ui-g">
+    <div class="ui-g-2 tr">Label:</div>
+    <div class="ui-g-10">
+      <input id="input" type="text" size="max" pInputText formControlName="label" style="width: 100%">
+    </div>
   </div>
-</div>
 
 
-<h3>Message</h3>
+  <h3>Message</h3>
 
-<p-editor [(ngModel)]="message" [style]="{'height':'320px'}">
-  <p-header>
+  <p-editor formControlName="message" [style]="{'height':'320px'}">
+    <p-header>
     <span class="ql-formats">
       <button class="ql-bold" aria-label="Bold"></button>
       <button class="ql-italic" aria-label="Italic"></button>
       <button class="ql-underline" aria-label="Underline"></button>
     </span>
-  </p-header>
-</p-editor>
+    </p-header>
+  </p-editor>
 
+</form>
 <p>
   <p-button (onClick)="save()" label="Save"></p-button>
   <p-button (onClick)="cancel()" label="Cancel"></p-button>

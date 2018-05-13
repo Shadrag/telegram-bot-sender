@@ -5,6 +5,7 @@ import {TaskComponent} from './task/task.component';
 import {TaskListComponent} from './task-list/task-list.component';
 import {TokenListComponent} from './token-list/token-list.component';
 import {DbResolver} from './db.resolver';
+import {LoadTokenResolver} from './load-token.resolver';
 
 
 const routes: Routes = [
@@ -13,8 +14,16 @@ const routes: Routes = [
     resolve: {dbResolver: DbResolver},
     children: [
       {path: '', redirectTo: '/task-list', pathMatch: 'full'},
-      {path: 'task/:id', component: TaskComponent},
-      {path: 'task', component: TaskComponent},
+      {
+        path: 'task/:id',
+        component: TaskComponent,
+        resolve: {loadTokenResolver: LoadTokenResolver},
+      },
+      {
+        path: 'task',
+        component: TaskComponent,
+        resolve: {loadTokenResolver: LoadTokenResolver},
+      },
       {path: 'task-list', component: TaskListComponent},
       {path: 'token-list', component: TokenListComponent},
     ]
@@ -29,7 +38,7 @@ const routes: Routes = [
   ],
   declarations: [],
   exports: [RouterModule],
-  providers: [DbResolver]
+  providers: [DbResolver, LoadTokenResolver]
 })
 
 export class AppRoutingModule {

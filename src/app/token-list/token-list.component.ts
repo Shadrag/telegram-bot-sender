@@ -2,8 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {TokenService} from '../services/token.service';
 import * as _ from 'lodash';
 import {ConfirmationService} from 'primeng/api';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-token-list',
@@ -12,28 +10,16 @@ import {switchMap} from 'rxjs/operators';
 })
 export class TokenListComponent implements OnInit {
 
-  tokenList;
-  reloadList$ = new BehaviorSubject(true);
   displayTokenEditor = false;
   currentEditingId = null;
 
   @ViewChild('tokenEditor') tokenEditor;
 
-
-  constructor(private tokenService: TokenService, private confirmationService: ConfirmationService) {
+  constructor(public tokenService: TokenService, private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
-    this.reloadList$
-      .pipe(
-        switchMap(() => this.tokenService.getList()))
-      .subscribe((list) => {
-        this.tokenList = _.map(list, v => ({
-          id: v.id,
-          hash: v.hash || '<no value>',
-          token: v.token || '<no value>'
-        }));
-      });
+    if (this.tokenService.tokenList$.getValue().length === 0) this.tokenService.loadList();
   }
 
   addNewToken() {
@@ -56,7 +42,7 @@ export class TokenListComponent implements OnInit {
       accept: () => {
         this.tokenService.delete(id)
           .subscribe(value => {
-            this.reloadList$.next(true);
+            this.tokenService.loadList();
           });
       },
       reject: () => {
@@ -74,7 +60,7 @@ export class TokenListComponent implements OnInit {
       ? this.tokenService.add(this.tokenEditor.nativeElement.value)
       : this.tokenService.update(this.currentEditingId, this.tokenEditor.nativeElement.value))
       .subscribe(v => {
-        this.reloadList$.next(true);
+        this.tokenService.loadList();
       });
 
     this.displayTokenEditor = false;

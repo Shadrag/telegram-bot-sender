@@ -9,7 +9,7 @@ export class TaskService {
   dataNewTask = {
     'title': 'Bot Bot',
     'createDate': 1525446199,
-    'hash': '213b661f24ea207df0ee3be35fca70ed',
+    'hash': '2a30954845b40ff957e44f10891fcf59',
     'chats': ['121212', '131313']
   };
 

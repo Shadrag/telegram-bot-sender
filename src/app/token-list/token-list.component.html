@@ -9,7 +9,7 @@
 
 <h1 style="text-align: center">token..list</h1>
 
-<p-table [value]="tokenList">
+<p-table [value]="tokenService.tokenList$ | async">
   <ng-template pTemplate="header">
     <tr>
       <th>Token</th>
@@ -19,8 +19,8 @@
   </ng-template>
   <ng-template pTemplate="body" let-token>
     <tr>
-      <td>{{token.token}}</td>
-      <td>{{token.hash}}</td>
+      <td>{{token.token || '&#60;no value&#62;'}}</td>
+      <td>{{token.hash || '&#60;no value&#62;'}}</td>
       <td>
         <button pButton type="button" icon="fa-pencil" (click)="edit(token)"></button>
         <button pButton type="button" icon="fa-trash-o" (click)="delete(token.id)"></button>
