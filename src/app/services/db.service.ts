@@ -31,8 +31,11 @@ export class DbService {
     requestDB.onupgradeneeded = function (event) {
       const local_db = (<IDBOpenDBRequest>event.target).result;
 
-      const objectStore = local_db.createObjectStore('token-list', {keyPath: 'id', autoIncrement: true});
-      objectStore.createIndex('id', 'id', {unique: true});
+      const tokenStore = local_db.createObjectStore('token-list', {keyPath: 'id', autoIncrement: true});
+      tokenStore.createIndex('id', 'id', {unique: true});
+
+      const taskStore = local_db.createObjectStore('task-list', {keyPath: 'id', autoIncrement: true});
+      taskStore.createIndex('id', 'id', {unique: true});
     };
 
     return res$;

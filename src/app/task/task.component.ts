@@ -55,11 +55,31 @@ export class TaskComponent implements OnInit {
     this.taskForm.patchValue(taskObject);
   }
 
-  save() {
-
+  get isNewTask() {
+    const id = this.route.snapshot.paramMap.get('id');
+    return _.isEmpty(id) && !_.isEmpty(this.taskService.dataNewTask);
   }
 
-  cancel() {
+  get isExistingTask() {
+    const id = this.route.snapshot.paramMap.get('id');
+    return !_.isEmpty(id);
+  }
+
+
+  create() {
+    const fo = this.taskForm.value;
+    const nt = this.taskService.dataNewTask;
+    this.taskService.addTask({
+        project: nt.project,
+        date: nt.createDate,
+        token: nt.hash,
+        label: fo.label,
+        message: fo.message
+      }
+    ).subscribe(v => console.log(v));
+  }
+
+  update() {
 
   }
 
