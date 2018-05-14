@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TokenService} from '../services/token.service';
 
@@ -21,66 +20,71 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
 
     this.taskForm = new FormGroup({
+      id: new FormControl(),
       project: new FormControl(),
       date: new FormControl(),
-      token: new FormControl(),
+      hash: new FormControl(),
       label: new FormControl(),
       message: new FormControl(),
     });
 
-    let taskObject;
-
-    if (_.isEmpty(id)) {
+    if (!id) {
       if (_.isEmpty(this.taskService.dataNewTask)) {
         this.router.navigate(['/task-list']);
       } else {
         // create new task
-        const d = this.taskService.dataNewTask;
-        const hash = _.get(d, 'hash', null);
-        taskObject = {
-          project: _.get(d, 'title', '<no value>'),
-          token: hash + (_.isEmpty(_.find(this.tokenService.tokenList$.getValue(), {hash})) ? ' (not found)' : ' (founded)'),
-          date: moment(_.get(d, 'createDate') * 1000).format('DD-MM-YYYY'),
-          message: '',
-          label: ''
-        };
+        this.taskForm.patchValue(this.taskService.dataNewTask);
       }
     } else {
       // edit existing task
+      this.taskService.loadTask(id)
+        .subscribe(task => {
+          console.log(task);
+          this.taskForm.patchValue(task);
+        });
     }
 
-    this.taskForm.patchValue(taskObject);
   }
 
   get isNewTask() {
-    const id = this.route.snapshot.paramMap.get('id');
-    return _.isEmpty(id) && !_.isEmpty(this.taskService.dataNewTask);
+    const id = +this.route.snapshot.paramMap.get('id');
+    return !id && !_.isEmpty(this.taskService.dataNewTask);
   }
 
   get isExistingTask() {
-    const id = this.route.snapshot.paramMap.get('id');
-    return !_.isEmpty(id);
+    const id = +this.route.snapshot.paramMap.get('id');
+    return !!id;
   }
 
+  get isFoundedToken() {
+    const hash = this.taskForm.value.hash;
+    return !_.isEmpty(_.find(this.tokenService.tokenList$.getValue(), {hash}));
+  }
 
   create() {
     const fo = this.taskForm.value;
     const nt = this.taskService.dataNewTask;
     this.taskService.addTask({
         project: nt.project,
-        date: nt.createDate,
-        token: nt.hash,
+        date: nt.date,
+        hash: nt.hash,
         label: fo.label,
         message: fo.message
       }
-    ).subscribe(v => console.log(v));
+    ).subscribe(id => {
+      this.router.navigate(['task', id]);
+    });
   }
 
   update() {
 
+    this.taskService.updateTask(this.taskForm.value)
+      .subscribe(id => {
+        this.router.navigate(['task', id]);
+      });
   }
 
 }

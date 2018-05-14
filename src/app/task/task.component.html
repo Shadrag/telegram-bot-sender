@@ -12,17 +12,17 @@
 
 <div class="ui-g">
   <div class="ui-g-2 tr">Project:</div>
-  <div class="ui-g-10">{{taskForm.value.project}}</div>
+  <div class="ui-g-10">{{taskForm.value.project || '&#60;no value&#62;'}}</div>
 </div>
 
 <div class="ui-g">
   <div class="ui-g-2 tr">Date:</div>
-  <div class="ui-g-10">{{taskForm.value.date}}</div>
+  <div class="ui-g-10">{{taskForm.value.date*1000 | date}}</div>
 </div>
 
 <div class="ui-g">
   <div class="ui-g-2 tr">Token hash:</div>
-  <div class="ui-g-10">{{taskForm.value.token}}</div>
+  <div class="ui-g-10">{{taskForm.value.hash+(isFoundedToken?" (founded)" : " (not found)")}}</div>
 </div>
 
 <form [formGroup]="taskForm">

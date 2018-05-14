@@ -36,6 +36,9 @@ export class DbService {
 
       const taskStore = local_db.createObjectStore('task-list', {keyPath: 'id', autoIncrement: true});
       taskStore.createIndex('id', 'id', {unique: true});
+
+      const chatStore = local_db.createObjectStore('chat-list', {keyPath: 'id', autoIncrement: true});
+      chatStore.createIndex('id', 'id', {unique: true});
     };
 
     return res$;
