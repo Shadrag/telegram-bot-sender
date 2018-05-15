@@ -1,7 +1,31 @@
-p-fileUpload{
-  display: inline-flex;
-}
 
-/deep/ .ui-fileupload-choose {
-  //overflow: visible;
+:host {
+  p-fileUpload {
+    display: inline-flex;
+  }
+
+  /deep/ .ui-fileupload-choose {
+    //overflow: visible;
+  }
+
+  .task {
+    border: 1px solid #D5D5D5;
+    margin-bottom: 5px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .project {
+      position: absolute;
+      top: 0;
+      color: darkgray;
+      left: 3px;
+      font-size: 12px;
+    }
+    .label {
+      margin-left: 10px;
+    }
+  }
+
 }

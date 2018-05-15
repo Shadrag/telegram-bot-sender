@@ -40,4 +40,12 @@ export class TaskService {
     rq.onsuccess = event => s$.next(event.target.result);
     return s$;
   }
+
+  getList() {
+    const s$ = new Subject();
+    const tx = this.dbService.db.transaction(['task-list']);
+    const rq = tx.objectStore('task-list').getAll();
+    rq.onsuccess = event => s$.next(event.target.result);
+    return s$;
+  }
 }

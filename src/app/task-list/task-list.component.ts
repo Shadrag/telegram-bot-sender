@@ -12,7 +12,13 @@ export class TaskListComponent implements OnInit {
   constructor(private router: Router, private taskService: TaskService) {
   }
 
+  taskList = [];
+
   ngOnInit() {
+    this.taskService.getList()
+      .subscribe(list => {
+        this.taskList = <any>list;
+      });
   }
 
 

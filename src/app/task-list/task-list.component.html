@@ -11,3 +11,13 @@
     <button pButton type="button" label="Tokens" routerLink="/token-list"></button>
   </div>
 </p-toolbar>
+
+<h1 style="text-align: center">task..list</h1>
+
+<div class="list">
+  <div class="task" *ngFor="let task of taskList">
+    <div class="project">{{task.project || '&#60;no value&#62;'}}</div>
+    <div class="label">{{task.label || '&#60;no value&#62;'}}</div>
+  </div>
+
+</div>
