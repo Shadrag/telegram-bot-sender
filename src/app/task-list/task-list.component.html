@@ -16,8 +16,17 @@
 
 <div class="list">
   <div class="task" *ngFor="let task of taskList">
-    <div class="project">{{task.project || '&#60;no value&#62;'}}</div>
-    <div class="label">{{task.label || '&#60;no value&#62;'}}</div>
+    <div class="label">{{task.project || '&#60;no value&#62;'}} - {{task.label || '&#60;no value&#62;'}}</div>
+    <div class="progress">14 of 200</div>
+    <div class="button-panel">
+      <button pButton type="button" icon="fa-play"></button>
+      <button pButton type="button" icon="fa-stop"></button>
+      <button pButton type="button" icon="fa-pencil"></button>
+      <button pButton type="button" icon="fa-download"></button>
+      <button pButton type="button" icon="fa-trash"></button>
+      <button pButton type="button" icon="fa-lock"></button>
+      <button pButton type="button" icon="fa-reply-all"></button>
+    </div>
   </div>
 
 </div>

@@ -11,20 +11,18 @@
   .task {
     border: 1px solid #D5D5D5;
     margin-bottom: 5px;
-    height: 46px;
     display: flex;
     align-items: center;
     position: relative;
+    padding: 6px;
 
-    .project {
-      position: absolute;
-      top: 0;
-      color: darkgray;
-      left: 3px;
-      font-size: 12px;
-    }
     .label {
-      margin-left: 10px;
+    }
+    .progress {
+      flex-grow: 1;
+      text-align: center;
+    }
+    .button-panel {
     }
   }
 
