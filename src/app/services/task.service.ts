@@ -48,4 +48,13 @@ export class TaskService {
     rq.onsuccess = event => s$.next(event.target.result);
     return s$;
   }
+
+  deleteTask(id) {
+    // todo need delete chats in db
+    const s$ = new Subject();
+    const tx = this.dbService.db.transaction(['task-list'], 'readwrite');
+    const rq = tx.objectStore('task-list').delete(id);
+    rq.onsuccess = event => s$.next(event.target.result);
+    return s$;
+  }
 }

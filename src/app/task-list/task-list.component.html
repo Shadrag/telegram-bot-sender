@@ -19,14 +19,18 @@
     <div class="label">{{task.project || '&#60;no value&#62;'}} - {{task.label || '&#60;no value&#62;'}}</div>
     <div class="progress">14 of 200</div>
     <div class="button-panel">
-      <button pButton type="button" icon="fa-play"></button>
-      <button pButton type="button" icon="fa-stop"></button>
-      <button pButton type="button" icon="fa-pencil"></button>
-      <button pButton type="button" icon="fa-download"></button>
-      <button pButton type="button" icon="fa-trash"></button>
-      <button pButton type="button" icon="fa-lock"></button>
-      <button pButton type="button" icon="fa-reply-all"></button>
+      <button pButton type="button" icon="fa-play" disabled pTooltip="Run task (disabled)"></button>
+      <button pButton type="button" icon="fa-stop" disabled></button>
+      <button pButton type="button" icon="fa-pencil" routerLink="/task/{{task.id}}"
+              pTooltip="Go to edit message"></button>
+      <button pButton type="button" icon="fa-download" disabled></button>
+      <button pButton type="button" icon="fa-trash" pTooltip="Delete task" (click)="delete(task.id)"></button>
+      <button pButton type="button" icon="fa-lock" disabled></button>
+      <button pButton type="button" icon="fa-reply-all" disabled></button>
     </div>
   </div>
 
 </div>
+
+
+<p-confirmDialog></p-confirmDialog>
